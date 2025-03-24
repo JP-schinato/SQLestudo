@@ -202,5 +202,29 @@ SELECT
 FROM pedidos
 INNER JOIN lojas
 ON pedidos.ID_Loja = lojas.ID_Loja;
+-- Aprendendo Window FUNCTION
+
+SELECT SUM(Qtd_Vendida) FROM pedidos;
+
+
+-- Entendo OVER junto com PARTITION BY
+SELECT
+	ID_Loja,
+    Data_Venda,
+	Custo_Venda,
+    Custo_Unit,
+    SUM(Qtd_Vendida) OVER(PARTITION BY ID_Loja) AS 'Total Vendido' FROM pedidos;
+    
+    --Buscando total de clientes por gerente
+SELECT
+	Endereco,
+    Gerente,
+    ID_Loja,
+    loja,
+    Num_Funcionarios,
+    Telefone,
+    SUM(Num_Funcionarios) OVER(PARTITION BY Gerente) AS 'Funcionarios por Gerente'
+FROM lojas;
+    
 
 -- FIM DO MEU APRENDIZADO
